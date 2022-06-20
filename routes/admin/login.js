@@ -4,13 +4,15 @@ var usuariosModel = require('../../models/usuariosModel');
 
 
 /* GET home page. */
+/* diseño login */
 router.get('/', function(req, res, next) {
   res.render('admin/login',{
     layout: 'admin/layout'
   });
 });
 
-router.get('/logout', function(req, res, next) {
+/* diseño logout */
+router.get('/logout', function (req, res, next) {
   req.session.destroy(); //destruir
   res.render('admin/login', {
       layout: 'admin/layout'

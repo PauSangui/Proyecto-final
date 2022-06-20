@@ -5,8 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 require('dotenv').config();
-
 var session = require('express-session');
+
+var pool = require('./models/bd');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -25,15 +26,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use(session({
-  secret: 'abcdefghijklpmnoqrst',
-  resave: false,
+  secret: 'abcdefghijklpmnoqrstfdgd',
+  resave: false, 
   saveUninitialized: true
 }));
 
 secured = async (req, res, next) => {
   try {
-    //console.log(req.session.id_usuario);
+    console.log(req.session.id_usuario);
     if (req.session.id_usuario) {
       next();
     } else {
@@ -42,7 +45,8 @@ secured = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-};
+}
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
